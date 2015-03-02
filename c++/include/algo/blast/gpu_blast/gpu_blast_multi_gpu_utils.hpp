@@ -5,9 +5,10 @@
 #include <string>
 // CUDA runtime
 #include <cuda_runtime.h>
-#include <helper_cuda.h>
+//#include <helper_cuda.h>
 #include <algo/blast/gpu_blast/thread_work_queue.hpp>
 
+inline void checkCudaErrors(int) {}
 
 #ifdef _MSC_VER
 #include <windows.h>

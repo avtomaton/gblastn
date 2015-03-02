@@ -3,7 +3,7 @@
 
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
-#include <helper_cuda.h>
+//#include <helper_cuda.h>
 #include <thrust/device_vector.h>
 #include <thrust/sort.h> // for set
 
@@ -30,6 +30,7 @@
 #include <iostream>
 using namespace std;
 
+static void getLastCudaError(const char *msg) { printf("CUDA Error: %s\n", msg); }
 
 struct cudaScanAuxWrapMultiQueries : public GpuObject  
 {

@@ -2,23 +2,23 @@
 
 SHELL := /bin/bash
 
-NVCC_PATH := /usr/local/cuda/
+#NVCC_PATH := /usr/local/cuda/
 
 CC	:= gcc
 CXX 	:= g++
-NVCC	:= $(NVCC_PATH)/bin/nvcc
+NVCC	:= nvcc
 
 CXX_DIR := ../../../../
-CUDA_LIB := $(NVCC_PATH)/lib64
+#CUDA_LIB := $(NVCC_PATH)/lib64
 
-PROJ_DIR := $(CXX_DIR)/GCC447-ReleaseMT64
+PROJ_DIR := $(CXX_DIR)/GCC491-ReleaseMT64
 
 CPP_SRC = gpu_logfile.cpp gpu_blastn_na_ungapped_v3.cpp gpu_blastn_pre_search_engine.cpp gpu_blast_multi_gpu_utils.cpp work_thread.cpp work_thread_base.cpp thread_work_queue.cpp utility.cpp
 OBJ = $(CPP_SRC:.cpp=.o)
 
 #@echo $(OBJ)
 
-INCLUDE = -I$(CXX_DIR)/include/ -I$(PROJ_DIR)/inc/ -I$(CXX_DIR)/src -I./ -I$(NVCC_PATH)/include -I$(NVCC_PATH)/samples/common/inc 
+INCLUDE = -I$(CXX_DIR)/include/ -I$(PROJ_DIR)/inc/ -I$(CXX_DIR)/src
 
 COMMONFLAGS := -c -D_LINUX
 OPT_COMMAND := -mssse3
@@ -32,7 +32,7 @@ libgpublastn.a : $(OBJ) gpu_blastn_MB_and_smallNa.o
 	ar cru libgpublastn.a $(OBJ) gpu_blastn_MB_and_smallNa.o
 	ranlib libgpublastn.a	
 	cp libgpublastn.a                          $(PROJ_DIR)/lib/
-	cp $(CUDA_LIB)/libcudart.so*               $(PROJ_DIR)/lib/
+	#cp $(CUDA_LIB)/libcudart.so*               $(PROJ_DIR)/lib/
 
 %.o: %.cpp
 	$(CXX) $(COMMONFLAGS) $(OPT_COMMAND) $(INCLUDE) -fPIC -o $@ $<
