@@ -235,7 +235,7 @@ sed "/^FAST_CXXFLAGS/ c\ ${fast_cxxflags_line}" ${build_dir}/Makefile.mk > ${bui
 mv ${build_dir}/Makefile.mk.temp ${build_dir}/Makefile.mk
 
 
-make all_r  &>  ${working_dir}/log/ncbi_blast.output
+make all  &>  ${working_dir}/log/ncbi_blast.output
 if [ $? -ne 0 ]; then
     echo -e "\nError in NCBI BLAST installation. Look at \"ncbi_blast.output\" for more information"
     exit 1

@@ -30,7 +30,12 @@
 #include <iostream>
 using namespace std;
 
-static void getLastCudaError(const char *msg) { printf("CUDA Error: %s\n", msg); }
+static void getLastCudaError(const char *msg)
+{
+	cudaError_t err = cudaGetLastError();
+	if (err != cudaSuccess)
+		printf("CUDA Error (%s): %s\n", msg, cudaGetErrorString(err));
+}
 
 struct cudaScanAuxWrapMultiQueries : public GpuObject  
 {
